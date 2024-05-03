@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}
+detail
+{% endblock %}
+{% block body %}
+<h1>َAll product</h1>
+        <h1>{{ product.name }}</h1>
+        <img src="{{ product.image.url }}" style="width:300px; height=400px;" alt="">
+        <hr>
+        {% if product.status == 'Size' %}
+        <form action="" method="post">
+                {% csrf_token %}
+                {% for data in variant %}
+                   <input type="radio" value="{{ data.id }}" {% if variants.id == data.id %} checked{% endif %}
+                                name="select" onchange="this.form.submit();">
+                   <a href="" style="text-decoration: none">{{ data.size_variant }}</a>
+                {% endfor %}
+        </form>
+        {% elif product.status == 'Color' %}
+                <form action="" method="post">
+                         {% csrf_token %}
+                         {% for data in variant %}
+                                <input type="radio" value="{{ data.id }}" {% if variants.id == data.id %} checked{% endif %}
+                                name="select" onchange="this.form.submit();">
+                   <a href="" style="text-decoration: none">{{ data.color_variant }}</a>
+                </form>
+                {% endfor %}
+        {% endif %}
+{% endblock %}
+

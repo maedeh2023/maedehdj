@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}
+صفحه محصولات
+{% endblock %}
+{% block body %}
+<h1>َAll product</h1>
+
+    {% for data in category %}
+        <div class="btn-group">
+          <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Action
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Action</a>
+
+          </div>
+    </div>
+    {% endfor %}
+
+
+    {% for product in products %}
+        <h1>{{ product.name }}</h1>
+        <a href="{% url 'home:detail' product.id %}">
+        <img src="{{ product.image.url }}" style="width:300px; height=400px;" alt="">
+        </a>
+    {% if product.discount %}
+        <h4 style="text-decoration: line-through">{{ product.unit_price }}</h4>
+        <h3>{{ product.total_price }}</h3>
+    {% else %}
+         <h3>{{ product.unit_price }}</h3>
+        {% endif %}
+
+    {% endfor %}
+{% endblock %}
+
